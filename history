@@ -1,0 +1,520 @@
+    1  ip addr
+    2  ifup ens3
+    3  ls /etc/sysconfig/network-scripts/
+    4  cat /etc/sysconfig/network-scripts/ifcfg-eth0 
+    5  cp /etc/sysconfig/network-scripts/ifcfg-eth0 /etc/sysconfig/network-scripts/ifcfg-ens3
+    6  vim /etc/sysconfig/network-scripts/ifcfg-ens3
+    7  vi /etc/sysconfig/network-scripts/ifcfg-ens3
+    8  ifup ens3
+    9  ip addr
+   10  yum repolist
+   11  ip a s
+   12  reboot
+   13  visudo 
+   14  systemctl status sshd
+   15  systemctl start sshd
+   16  chattr -i /etc/ssh/sshd_config 
+   17  systemctl start sshd
+   18  systemctl status sshd
+   19  vi /etc/ssh/sshd_config
+   20  tail /var/log/messages 
+   21  restorecon /etc/ssh/sshd_config 
+   22  systemctl start sshd
+   23  systemctl status sshd
+   24  ip a s
+   25  ifup eth1
+   26  vim /etc/sysconfig/network-scripts/ifcfg-ens3 
+   27  mv /etc/sysconfig/network-scripts/ifcfg-ens3 /etc/sysconfig/network-scripts/ifcfg-eth1
+   28  ifup eth1
+   29  ip a s
+   30  ping google.com
+   31  ip a s
+   32  ls /etc/yum.repos.d/
+   33  yum -y update
+   34  yum -y install openstack-packstack
+   35  packstack --gen-answer-file /root/answers.txt
+   36  vim answers.txt 
+   37  ssh neutron
+   38  ssh compute1
+   39  ssh compute2
+   40  ssh 10.0.0.11
+   41  ssh 10.0.0.12
+   42  ssh 10.0.0.13
+   43  ssh 10.0.0.10
+   44  packstack --answer-file /root/answers.txt 
+   45  ls
+   46  . keystonerc_admin 
+   47  openstack-status 
+   48  . keystonerc_admin 
+   49  openstack-status 
+   50  cat keystonerc_admin 
+   51  cat keystonerc_demo 
+   52  vim keystonerc_demo
+   53  vim keystonerc_admin 
+   54  vim answers.txt 
+   55  . keystonerc_admin 
+   56  openstack-status 
+   57  ip route show
+   58  su centos
+   59  cat .ssh/id_rsa.pub 
+   60  ssh localhost
+   61  cat .ssh/authorized_keys 
+   62  exit
+   63  cp /home/centos/.ssh/id_rsa .ssh/id_rsa
+   64  ssh localhost
+   65  ssh compute1
+   66  diff /home/centos/.ssh/id_rsa .ssh/id_rsa
+   67  cp /home/centos/.ssh/id_rsa.pub .ssh/id_rsa.pub
+   68  ssh compute1
+   69  ssh compute2
+   70  ssh neutron
+   71  exit
+   72  passwd
+   73  ssh compute1
+   74  su centos
+   75  ls
+   76  vim .ssh/config 
+   77  cat .ssh/id_rsa.pub 
+   78  su centos
+   79  ssh compute1
+   80  ssh compute1 -vvv
+   81  ssh centos@compute1 -vvv
+   82  exit
+   83  nova-mandage service list
+   84  nova-manage service list
+   85  nova-manage service list | sort 
+   86  source keystonerc_admin 
+   87  nova
+   88  nova service-list
+   89  nova service-delete 1
+   90  nova service-list
+   91  nova service-delete 7
+   92  nova service-delete 8
+   93  nova service-delete 9
+   94  nova service-delete 10
+   95  nova service-delete 11
+   96  nova service-delete 12
+   97  nova service-delete 13
+   98  exit
+   99  ssh compute1
+  100  source keystonerc_admin 
+  101  nova service-list 
+  102  reboot
+  103  nova-manage service list | sort
+  104  hostname
+  105  cat /etc/hostname 
+  106  . keystonerc_admin 
+  107  nova service-list
+  108  nova service-delete 2
+  109  nova service-delete 3
+  110  nova service-delete 4
+  111  ssh compute1
+  112  ssh compute2
+  113  nova service-list
+  114  horizon
+  115  vim keystonerc_admin 
+  116  nova service-list
+  117  nova service-delete 5
+  118  nova service-delete 6
+  119  ssh compute2
+  120  ssh compute1
+  121  sudo reboot
+  122  nova flavor-list
+  123  keystone tenant-list
+  124  nova --os-auth-url=http://192.168.0.10:5000/v2.0 --os-tenant-name=admin --os-user-name=admin --os-password=alta3 flavor-list
+  125  hto
+  126  htop
+  127  exit
+  128  tail -f /var/log/nova/nova-novncproxy.log 
+  129  netstat -an | 6080
+  130  netstat -an | grep 6080
+  131  exit
+  132  ansible openstack -i hosts -m command -a "ip addr"
+  133  ansible openstack -i hosts -m command -a "whoami"
+  134  exit
+  135  nova-manage service list | sort
+  136  exit
+  137  nova-manage service list | sort
+  138  source keystonerc_admin 
+  139  nova service-list
+  140  nova service-delete 21
+  141  nova service-list
+  142  nova-manage service list | sor
+  143  hostname
+  144  nova service-list
+  145  nova service-delete 19
+  146  nova service-delete 20
+  147  nova service-delete 22
+  148  nova service-delete 23
+  149  nova service-list
+  150  nova service-delete 24
+  151  nova service-list
+  152  exit
+  153  url -s -X POST http://192.168.0.10:5000/v2.0/token
+  154  curl -s -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}'
+  155  curl -s -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | less
+  156  curl -s -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | pretty
+  157  curl -s -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool
+  158  curl -s -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool | less
+  159  curl -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool | less
+  160  curl -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/jjson"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool | less
+  161  curl -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta33"}}}' | python -m json.tool | less
+  162  curl -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool | less
+  163  curl -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool
+  164  curl -X POST http://192.168.0.10:5000/v2.0/tokens             -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool
+  165  curl -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool
+  166  curl -X POST http://192.168.0.10:5000/v2.0/tokens  -i         -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool
+  167  curl -X -i POST http://192.168.0.10:5000/v2.0/tokens         -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool
+  168  curl -X POST http://192.168.0.10:5000/v2.0/tokens  -i         -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool
+  169  curl -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool | less
+  170  curl -X -i POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool | less
+  171  curl -i -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool | less
+  172  curl -v -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool | less
+  173  curl -v -X POST http://192.168.0.10:5000/v2.0/tokens           -H "Content-Type: application/json"           -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}'
+  174  q
+  175  curl -v -X POST http://192.168.0.10:5000/v2.0/tokens -H "Content-Type: application/json" -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}'
+  176  source keystonerc_admin 
+  177  nova flavor --help
+  178  nova help flavor
+  179  nova --help flavor
+  180  nova --help flavor | less
+  181  nova help
+  182  nova help flavor*
+  183  nova help flavor.*
+  184  nova help --flavor.*
+  185  nova help flavor-list
+  186  nova flavor-list
+  187  nova flavor-create custom.shrimpy 6 512 2 1
+  188  nova help flavor-create
+  189  nova flavor-list
+  190  [root@controller ~(keystone_admin)]# nova flavor-list
+  191  +----+----------------+-----------+------+-----------+------+-------+-------------+-----------+
+  192  | ID | Name           | Memory_MB | Disk | Ephemeral | Swap | VCPUs | RXTX_Factor | Is_Public |
+  193  +----+----------------+-----------+------+-----------+------+-------+-------------+-----------+
+  194  | 1  | m1.tiny        | 512       | 1    | 0         |      | 1     | 1.0         | True      |
+  195  | 2  | m1.small       | 2048      | 20   | 0         |      | 1     | 1.0         | True      |
+  196  | 3  | m1.medium      | 4096      | 40   | 0         |      | 2     | 1.0         | True      |
+  197  | 4  | m1.large       | 8192      | 80   | 0         |      | 4     | 1.0         | True      |
+  198  | 5  | m1.xlarge      | 16384     | 160  | 0         |      | 8     | 1.0         | True      |
+  199  | 6  | custom.shrimpy | 512       | 2    | 0         |      | 1     | 1.0         | True      |
+  200  +----+----------------+-----------+------+-----------+------+-------+-------------+-----------+
+  201  sourc keystonerc_aliceanderson
+  202  exit
+  203  ssh compute1
+  204  ssh compute2
+  205  ls
+  206  nova-manage service list | sort
+  207  ssh compute1 
+  208  hostname
+  209  source keystonerc_admin
+  210  keystone catalog | less
+  211  keystone-manage --version
+  212  nova-manage --version
+  213  glance-manage --version
+  214  nova service-list
+  215  keystone catalog | less
+  216  nova service-list
+  217  nova-manage service list | sort
+  218  keystone-manage --version
+  219  nova-manage --version
+  220  glance-manage --version
+  221  # hi
+  222  # Hey there
+  223  keystone tenant-create --name vault_tek
+  224  keystone user-create --name chestercopperpot --tenant vault_tek --pass pa55w0rd --email chester@vault_tek.example
+  225  keystone-manage --version
+  226  keystone tenant-list
+  227  keystone user-list
+  228  chestercopperpot:fa5tpa55w0rd
+  229  nova-manage service list | sort
+  230  sccreen
+  231  screen
+  232  screen -ls
+  233  screen
+  234  screen -x
+  235  screen -ls
+  236  screen -x
+  237  tail -f /var/log/messages
+  238  tail -f /var/log/secure
+  239  service sshd restart
+  240  service httpd restart
+  241  ip route
+  242  exit
+  243  nova-manage service list | sort
+  244  cd
+  245  source keystonerc_admin
+  246  keystone catalog | less
+  247  nova service-list
+  248  keystone-manage --version
+  249  nova-manage --version
+  250  glance-manage --version
+  251  keystone tenant-create --name vault_tek
+  252  keystone user-create --name chestercopperpot --tenant vault_tek --pass fa5tpa55w0rd --email chester@vault_tek.example
+  253  keystone tenant-list
+  254  keystone user-list
+  255  find / -name 'policy.json'
+  256  cat /etc/cinder/policy.json | less
+  257  keystone role-list
+  258  keystone role-create --name ultra_admin
+  259  keystone role-list
+  260  keystone tenant-list
+  261  keystone user-role-add --user aliceanderson --role ultra_admin --tenant a254b994a42d4468a7338aa5a4d5e3e2
+  262  keystone user-role-list --user aliceanderson --tenant a254b994a42d4468a7338aa5a4d5e3e2
+  263  source keystonerc_admin
+  264  openstack
+  265  quit
+  266  exit
+  267  nova flavor-list
+  268  keystone tenant-list
+  269  nova --os-auth-url=http://192.168.0.10:5000/v2.0 --os-tenant-name=admin --os-user-name=admin --os-password=alta3 flavor-list
+  270  nova flavor-list
+  271  nova -h
+  272  nova -h | grep as-auth-url
+  273  nova -h | grep os-auth-url
+  274  nova -h | grep os-tenant-name
+  275  nova -h | grep os-user-name
+  276  nova -h | grep os-password
+  277  nova --os-auth-url=http://192.168.0.10:5000/v2.0 --os-tenant-name=admin --os-user-name=admin --os-password=alta3 --debug flavor-list
+  278  cat keystonerc_admin
+  279  printenv | sort
+  280  source keystonerc_admin
+  281  printenv
+  282  printenv | grep OS_
+  283  nova flavor-list
+  284  keystone tenant-create --name temp_tenant
+  285  keystone tenant-list
+  286  openstack
+  287  source ketstonerc_admin
+  288  source keystonerc_admin
+  289  keystone user-list
+  290  keystone user-get chester*
+  291  keystone user-get chestercopperpot
+  292  keystone tenant-list
+  293  keystone tenant-get 269a48a01a034825afb8cd4cd4feca63
+  294  keystone tenant-get a254b994a42d4468a7338aa5a4d5e3e2
+  295  keystone tenant-get vault-tek
+  296  keystone tenant-get vault_tek
+  297  cp keystonerc_admin keystonerc_chestercopperpot
+  298  ls
+  299  vi keystonerc_chestercopperpot
+  300  source keystonerc_chestercopperpot
+  301  printenv | grep OS_
+  302  cat keystonerc_chestercopperpot
+  303  vi keystonerc_chestercopperpot
+  304  cat keystonerc_chestercopperpot
+  305  source keystonerc_chestercopperpot
+  306  printenv | grep OS
+  307  ls -ltr
+  308  diff *admin * pot
+  309  source keystonerc_chestercopperpot
+  310  ps
+  311  source keystonerc_chestercopperpot
+  312  vim keystonerc_chestercopperpot 
+  313  source keystonerc_chestercopperpot
+  314  printenv | grep OS_
+  315  nova flavor-list
+  316  keystone tenant-list
+  317  cp keystonerc_admin keystonerc_aliceanderson
+  318  ls -ltr
+  319  vi keystonerc_aliceanderson
+  320  cat keystonerc_aliceanderson
+  321  cp keystonerc_admin keystonerc_bobbarker
+  322  vi *bob*
+  323  cat *bob*
+  324  source keystonerc_admin
+  325  keystone user-create --name dorisday --tenant vault_tek --pass fa5tpa55w0rd --email dorisday@vault_tek.example
+  326  nano keystonerc_dorisday
+  327  vi *doris*
+  328  ls -ltr
+  329  >> keystonerc_dorisday
+  330  ls -ltr
+  331  vi *doris*
+  332  ls -ltr
+  333  cp keystonerc_aliceanderson keystonerc_dorisday
+  334  vi dor*
+  335  ls -ltr
+  336  vi *dor*
+  337  ls -ltr
+  338  cat *dor*
+  339  source keystonerc_dorisday
+  340  nova flavor-list
+  341  curl -s -X POST http://192.168.0.10:5000/v2.0/tokens -H "Content-Type: application/json" -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool | lesscurl -s -X POST http://192.168.0.10:5000/v2.0/tokens -H "Content-Type: application/json" -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool | less
+  342  !
+  343  curl -s -X POST http://192.168.0.10:5000/v2.0/tokens -H "Content-Type: application/json" -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | python -m json.tool | less
+  344  curl -v -X POST http://192.168.0.10:5000/v2.0/tokens -H "Content-Type: application/json" -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta3"}}}' | less
+  345  curl -v -X POST http://192.168.0.10:5000/v2.0/tokens -H "Content-Type: application/json" -d '{"auth":{"tenantName":"admin","passwordCredentials":{"username":"admin","password":"alta34567"}}}' | python -m json.tool | less
+  346  source keystonerc_admin
+  347  nova help _ less
+  348  nova flavor-list
+  349  nova flavor-create custom.shrimpy 6 512 2 1
+  350  nova flavor-list
+  351  source keystonerc_aliceanderson
+  352  nova flavor-list
+  353  source keystonerc_chestercopperpot
+  354  nova flavor-list
+  355  nova help flavor-create
+  356  source keystonerc_admin
+  357  nova flavor-create --is-public false secret.monster 8 125000 200 8
+  358  nova flavor-list
+  359  nova flavor-list --all
+  360  nova help | grep flavor
+  361  nova help flavor-access-add
+  362  keystone user-get admin
+  363  nova flavor-access-add 8 e9483918caa940a48fe882ba092c7e0b
+  364  nova flavor-list
+  365  nova flavor-access-add 8 300b2cc45c3846939e589310ae714e46
+  366  nova flavor-list
+  367  keystone user-get aliceanderson
+  368  keystone tenant-get a254b994a42d4468a7338aa5a4d5e3e2
+  369  nova flavor-access-add 8 a254b994a42d4468a7338aa5a4d5e3e2
+  370  source keystonerc_aliceanderson
+  371  nova flavor-list
+  372  source keystonerc_chestercopperpot
+  373  nova flavor-list
+  374  glance image-list
+  375  neutron net-list
+  376  nova boot --flavor custom.shrimpy --image cirros --nic net-id=<xxxxxxxxxxxx> vt
+  377  nova boot --flavor custom.shrimpy --image cirros --nic net-id=<xxxxxxxxxxxx> vt1
+  378  nova boot --flavor custom.shrimpy --image cirros --nic net-id==20ca30a2-e3fb-4e62-bd78-08dc471e93ed vt1
+  379  nova boot --flavor custom.shrimpy --image cirros --nic net-id=20ca30a2-e3fb-4e62-bd78-08dc471e93ed vt1
+  380  nova list
+  381  nova show vt1
+  382  source ketstonerc_admin
+  383  source keystonerc_admin
+  384  nova list --all-tenants
+  385  VAR_UUID=zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzz
+  386  nova show $VAR_UUID
+  387  VAR_UUID=
+  388  nova show $VAR_UUID
+  389  VAR_UUID=zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzz vt1
+  390  nova list --all-tenants
+  391  VAR_UUID=8b9f642c-304b-4f46-abb2-09e4dc1dc111
+  392  nova show $VAR_UUID
+  393  keystone tenant-list
+  394  nova diagnostics $VAR_UUID
+  395  nova meta $VAR_UUID set mtag1='vault_tek box'nova meta $VAR_UUID set mtag1='vault_tek box'
+  396  nova meta $VAR_UUID set mtag1='vault_tek box'
+  397  nova show $VAR_UUID
+  398  nova meta $VAR_UUID set mtag2='uh oh I set this tag incorrectly'
+  399  nova show $VAR_UUID
+  400  nova meta $VAR_UUID delete mtag2
+  401  nova show $VAR_UUID
+  402  nova pause $VAR_UUID
+  403  nova show $VAR_UUID
+  404  nova unpause $VAR_UUID
+  405  nova show $VAR_UUID
+  406  nova suspend $VAR_UUID
+  407  nova show $VAR_UUID
+  408  nova resume $VAR_UUID
+  409  nova show $VAR_UUID
+  410  nova reboot $VAR_UUID
+  411  nova show $VAR_UUID
+  412  nova reboot $VAR_UUID
+  413  nova show $VAR_UUID
+  414  nova rescue $VAR_UUID
+  415  nova unrescue $VAR_UUID
+  416  nova show $VAR_UUID
+  417  nova rescue $VAR_UUID
+  418  nova show $VAR_UUID
+  419  nova unrescue $VAR_UUID
+  420  nova show $VAR_UUID
+  421  nova --help
+  422  nova --help | more
+  423  nova show $VAR_UUID
+  424    
+  425  nova boot $VAR_UUID
+  426  nova reboot $VAR_UUID
+  427  nova unrescue $VAR_UUID
+  428  nova show $VAR_UUID
+  429  nova stop $VAR_UUID
+  430  nova show $VAR_UUID
+  431  quit
+  432  exit
+  433  source keystonerc_chestercopperpot
+  434  nova secgroup-list
+  435  nova secgroup-create http-ssh "Allowing http and ssh traffic"
+  436  nova secgroup-list
+  437  nova secgroup-add-rule http-ssh tcp 80 80 0.0.0.0/0
+  438  nova secgroup-add-rule http-ssh tcp 22 22 0.0.0.0/0
+  439  nova secgroup-list-rules http-ssh
+  440  source keystonerc_chestercopperpot
+  441  printenv | grep OS_
+  442  neutron net-create vault-tek-network
+  443  neutron subnet-create --name vault-tek-network-subnet-10 --gateway 10.10.0.1 vault-tek-network 10.10.0.0/24
+  444  neutron router-create vault-tek-router
+  445  neautron router-gateway-set vault-tek-router public
+  446  neutron router-gateway-set vault-tek-router public
+  447  neutron router-show <ROUTER-ID> | less -S
+  448  neutron router-show <ROUTER-ID> | less -5
+  449  neutron router-show 73cdc516-bb63-4d99-916b-e5b7bfaf292b | less -S
+  450  neutron router-show 8b9f642c-304b-4f46-abb2-09e4dc1dc111 | more
+  451  neutron router-show <ROUTER-ID>
+  452  neutron router-show 8b9f642c-304b-4f46-abb2-09e4dc1dc111
+  453  neutron router-show
+  454  neutron router-show ?
+  455  neutron router-show 9405ffef-314c-443b-8cbd-6714b86206ce
+  456  neutron router-interface-add vault-tek-router vault-tek-network-subnet-10
+  457  neutron router-show 9405ffef-314c-443b-8cbd-6714b86206ce | less -S
+  458  neutron router-show 9405ffef-314c-443b-8cbd-6714b86206ce
+  459  source keystonerc_admin
+  460  neutron subnet-list
+  461  neutron subnet-show vault-tek-network-subnet-10
+  462  source keystonerc_chestercopperpot
+  463  nova show vt2
+  464  ssh root@neutron
+  465  source .bashrc
+  466  pwd
+  467  ls /var/log/nova
+  468  uname -a
+  469  ls /var/log/glance
+  470  ls /var/log/cinder
+  471  ssh root@compute1
+  472  uname -a
+  473  source ketstonerc_admin
+  474  source keystonerc_admin
+  475  glance image-list
+  476  glance help image-create
+  477  glance image-create --name cirros_alpha --disk-format qcow2 --container-format bare --is-public true --location https://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img
+  478  glance image-list
+  479  neutron net-list
+  480  nova boot --flavor custom.shrimpy --image cirros_alpha --nic net-id=20ca30a2-e3fb-4e62-bd78-08dc471e93ed admin_box
+  481  exit
+  482  pvdisplay
+  483  source keystonerc_chestercopperpot
+  484  cinder create --display_name NASferatu 1
+  485  cinder list
+  486  nova list
+  487  nova volume-attach 8e82ddfd-86b2-4d89-8a40-ff139d2e0e92 ea51b7ff-f7ad-41b1-a37e-9991b3eadd76
+  488  nova volume-attach 8e82ddfd-86b2-4d89-8a40-ff139d2e0e92 ea51b7ff-f7ad-41b1-a37e-9991b3eadd76 auto
+  489  cinder list
+  490  nova volume-detach 8e82ddfd-86b2-4d89-8a40-ff139d2e0e92 ea51b7ff-f7ad-41b1-a37e-9991b3eadd76
+  491  cinder list
+  492  cinder delete NASferatu
+  493  cinder list
+  494  nova list
+  495  nova start vt2
+  496  nova list
+  497  nova show vt2 | grep network
+  498  neutron router-list | cut -c -59
+  499  ssh root@neutron
+  500  neutron net-list | grep vault
+  501  nova list
+  502  cinder list
+  503  cinder show cargo-bay | grep /dev/
+  504  nova volume-detach 8e82ddfd-86b2-4d89-8a40-ff139d2e0e92 5d8e04e5-ffdc-48f7-abca-bdd6165b0ae9
+  505  cinder list
+  506  nova list
+  507  nova volume-attach 2eb5a150-9e40-46f0-9402-551cd614f094 5d8e04e5-ffdc-48f7-abca-bdd6165b0ae9 auto
+  508  ip netns list
+  509  ssh root@neutron
+  510  exit
+  511  mkdir ~/myopenstack
+  512  cd myopenstack
+  513  yum install git
+  514  git config --global user.name "steve"
+  515  git config --global user.email "wevets8@gmail.com"
+  516  git config --list
+  517  git init
+  518  git config --list
+  519  git init
+  520  history > history
